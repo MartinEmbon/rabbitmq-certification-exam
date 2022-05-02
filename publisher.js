@@ -1,4 +1,7 @@
 const amqp = require("amqplib")
+require('dotenv').config()
+
+//docker run --name rabbitmq -p 5672:5672 rabbitmq 
 //advanced message queue protocol
 let limit = 0;
 
@@ -8,7 +11,7 @@ while(limit<=100){
 
     async function connect(){
         try{
-            const amqpServer = "amqps://aawzdcjj:JVv0lelCpZGWMjWFS6h9_vENYx4CC2L6@jackal.rmq.cloudamqp.com/aawzdcjj"
+            const amqpServer = process.env.amqpServerConfig
             const connection = await amqp.connect(amqpServer);
             // create connection with the amqp in the RabbitMQ port: 5672
            // const connection = await amqp.connect("amqp://localhost:5672");

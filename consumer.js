@@ -1,8 +1,9 @@
 const amqp = require("amqplib")
+require('dotenv').config()
 
 async function connect(){
     try{
-        const amqpServer = "amqps://aawzdcjj:JVv0lelCpZGWMjWFS6h9_vENYx4CC2L6@jackal.rmq.cloudamqp.com/aawzdcjj"
+        const amqpServer = process.env.amqpServerConfig
         const connection = await amqp.connect(amqpServer);
         //const connection = await amqp.connect("amqp://localhost:5672");
         const channel = await connection.createChannel();
