@@ -7,10 +7,10 @@ async function connect(){
         const connection = await amqp.connect(amqpServer);
         //const connection = await amqp.connect("amqp://localhost:5672");
         const channel = await connection.createChannel();
-        await channel.assertQueue("jobs");
+        await channel.assertQueue("topico");
 
         //get messages, consuming de jobs queue
-        channel.consume("jobs",message =>{
+        channel.consume("topico",message =>{
             const input = JSON.parse(message.content.toString())
             console.log(`Received from ${input.number}`)
             if(input.number<=100){
