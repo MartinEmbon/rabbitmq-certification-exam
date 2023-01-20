@@ -19,9 +19,9 @@ while(limit<=100){
             const channel = await connection.createChannel();
             // publish to a queue (to an exchange).  
             //assertQueue will make sure the queue exists, otherwise will create one
-            await channel.assertQueue("topico");
+            await channel.assertQueue("exam");
             //send the result to the jobs queue
-            channel.sendToQueue("topico",Buffer.from(JSON.stringify(msg)))
+            channel.sendToQueue("exam",Buffer.from(JSON.stringify(msg)))
             console.log(`Job sent successfully ${msg.number}`)
             //close chanel and connection
             await channel.close();

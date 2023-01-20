@@ -5,15 +5,13 @@ async function connect(){
     try{
         const amqpServer = process.env.amqpServerConfig
         const connection = await amqp.connect(amqpServer);
-        //const connection = await amqp.connect("amqp://localhost:5672");
         const channel = await connection.createChannel();
-        await channel.assertQueue("topico");
+        await channel.assertQueue("exam");
 
-        //get messages, consuming de jobs queue
-        channel.consume("topico",message =>{
+    
+        channel.consume("exam",message =>{
             const input = JSON.parse(message.content.toString())
-            console.log(`Received from ${input.number}`)
-            if(input.number<=100){
+            if(input){
                 channel.ack(message);
             }
         })
@@ -21,8 +19,10 @@ async function connect(){
         console.log("Waiting for messages...")
 
     }catch(err){
-        console.error(err)
+        console.log(err)
     }
+    
 }
 
 connect()
+
